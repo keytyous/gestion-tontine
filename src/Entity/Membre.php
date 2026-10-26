@@ -23,6 +23,10 @@ class Membre extends Utilisateur
     #[ORM\JoinColumn(nullable: false)]
     private ?Fonction $fonction = null;
 
+    #[ORM\ManyToOne(inversedBy: 'membres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Groupement $groupement = null;
+
    
     public function getNomComplet(): ?string
     {
@@ -68,6 +72,18 @@ class Membre extends Utilisateur
     public function setFonction(?Fonction $fonction): static
     {
         $this->fonction = $fonction;
+
+        return $this;
+    }
+
+    public function getGroupement(): ?Groupement
+    {
+        return $this->groupement;
+    }
+
+    public function setGroupement(?Groupement $groupement): static
+    {
+        $this->groupement = $groupement;
 
         return $this;
     }

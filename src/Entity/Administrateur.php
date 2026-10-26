@@ -8,9 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AdministrateurRepository::class)]
 class Administrateur extends Membre
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
 
 
     #[ORM\Column]
@@ -18,6 +15,10 @@ class Administrateur extends Membre
 
     #[ORM\Column(length: 100)]
     private ?string $statut = null;
+
+    #[ORM\ManyToOne(inversedBy: 'administrateurs')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Groupement $groupement = null;
 
     
 
@@ -41,6 +42,18 @@ class Administrateur extends Membre
     public function setStatut(string $statut): static
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getGroupement(): ?Groupement
+    {
+        return $this->groupement;
+    }
+
+    public function setGroupement(?Groupement $groupement): static
+    {
+        $this->groupement = $groupement;
 
         return $this;
     }
