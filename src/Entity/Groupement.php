@@ -29,6 +29,11 @@ class Groupement
 
     #[ORM\Column]
     private ?\DateTime $updateAt = null;
+    /**
+     * @var Collection<int, Administrateur>
+     */
+    #[ORM\OneToMany(targetEntity: Administrateur::class, mappedBy: 'groupement')]
+    private Collection $administrateurs;
 
     /**
      * @var Collection<int, Membre>
