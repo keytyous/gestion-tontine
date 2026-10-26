@@ -20,6 +20,12 @@ class Role
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createAt = null;
+
+    #[ORM\Column]
+    private ?\DateTime $updateAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +51,30 @@ class Role
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCreateAt(): ?\DateTimeImmutable
+    {
+        return $this->createAt;
+    }
+
+    public function setCreateAt(\DateTimeImmutable $createAt): static
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTime
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(\DateTime $updateAt): static
+    {
+        $this->updateAt = $updateAt;
 
         return $this;
     }
