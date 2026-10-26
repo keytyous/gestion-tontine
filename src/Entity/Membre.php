@@ -8,9 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
 class Membre extends Utilisateur
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+  
 
     #[ORM\Column(length: 100)]
     private ?string $nomComplet = null;
@@ -20,6 +18,10 @@ class Membre extends Utilisateur
 
     #[ORM\Column(length: 100)]
     private ?string $adresse = null;
+
+    #[ORM\ManyToOne(inversedBy: 'membres')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Fonction $fonction = null;
 
    
     public function getNomComplet(): ?string
@@ -54,6 +56,18 @@ class Membre extends Utilisateur
     public function setAdresse(string $adresse): static
     {
         $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getFonction(): ?Fonction
+    {
+        return $this->fonction;
+    }
+
+    public function setFonction(?Fonction $fonction): static
+    {
+        $this->fonction = $fonction;
 
         return $this;
     }
