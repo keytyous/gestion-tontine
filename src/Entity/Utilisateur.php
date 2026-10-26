@@ -5,8 +5,14 @@ namespace App\Entity;
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-class Utilisateur
+#[ORM\Entity]
+#[ORM\InheritanceType('JOINED')]
+#[ORM\DiscriminatorColumn(name: 'type_utilisateur', type: 'string')]
+#[ORM\DiscriminatorMap([
+    'membre' => Membre::class,
+    'administrateur' => Administrateur::class,
+])]
+abstract class Utilisateur
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
