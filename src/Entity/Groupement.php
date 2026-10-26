@@ -35,13 +35,6 @@ class Groupement
      */
     #[ORM\OneToMany(targetEntity: Membre::class, mappedBy: 'groupement')]
     private Collection $membres;
-
-    /**
-     * @var Collection<int, Administrateur>
-     */
-    #[ORM\OneToMany(targetEntity: Administrateur::class, mappedBy: 'groupement')]
-    private Collection $administrateurs;
-
     /**
      * @var Collection<int, Campagne>
      */
